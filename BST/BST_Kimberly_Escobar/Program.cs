@@ -1,18 +1,11 @@
 ﻿namespace BST
 {
-    // Representa cada nodo del Árbol Binario de Búsqueda
     public class Nodo
     {
-        // Valor entero almacenado en el nodo
         public int Valor;
-
-        // Referencia al hijo izquierdo
         public Nodo Izq;
-
-        // Referencia al hijo derecho
         public Nodo Der;
 
-        // Constructor del nodo
         public Nodo(int valor)
         {
             Valor = valor;
@@ -21,71 +14,55 @@
         }
     }
 
-    // Clase que representa el Árbol Binario de Búsqueda
     public class Arbol
     {
-        // Nodo principal del árbol
         public Nodo Raiz;
 
-        // Constructor del árbol
         public Arbol()
         {
             Raiz = null;
         }
 
-        // Inserta un nuevo valor en el árbol
         public bool Insertar(int valor)
         {
-            // Evita que se inserten valores duplicados
             if (Buscar(Raiz, valor))
                 return false;
 
-            // Inserción recursiva del nuevo nodo
             Raiz = InsertarRec(Raiz, valor);
             return true;
         }
 
-        // Método recursivo para insertar un nodo
         private Nodo InsertarRec(Nodo actual, int valor)
         {
-            // Si la posición está vacía, se crea un nuevo nodo
             if (actual == null)
                 return new Nodo(valor);
 
-            // Los valores menores se colocan a la izquierda
             if (valor < actual.Valor)
             {
                 actual.Izq = InsertarRec(actual.Izq, valor);
             }
             else
             {
-                // Los valores mayores se colocan a la derecha
                 actual.Der = InsertarRec(actual.Der, valor);
             }
 
             return actual;
         }
 
-        // Busca un valor dentro del árbol utilizando recursividad
         public bool Buscar(Nodo actual, int valor)
         {
-            // Si no existe el nodo, el valor no se encuentra
             if (actual == null)
                 return false;
 
-            // Si el valor coincide, se encontró
             if (actual.Valor == valor)
                 return true;
 
-            // Busca en el lado izquierdo si el valor es menor
             if (valor < actual.Valor)
                 return Buscar(actual.Izq, valor);
             else
-                // Busca en el lado derecho si el valor es mayor
                 return Buscar(actual.Der, valor);
         }
 
-        // Recorrido Inorden: Izquierda - Raíz - Derecha
         public void Inorden(Nodo actual)
         {
             if (actual != null)
@@ -96,7 +73,6 @@
             }
         }
 
-        // Recorrido Preorden: Raíz - Izquierda - Derecha
         public void Preorden(Nodo actual)
         {
             if (actual != null)
@@ -107,7 +83,6 @@
             }
         }
 
-        // Recorrido Postorden: Izquierda - Derecha - Raíz
         public void Postorden(Nodo actual)
         {
             if (actual != null)
@@ -119,19 +94,13 @@
         }
     }
 
-    // Clase principal del programa
     class Program
     {
-        // Método principal donde comienza la ejecución
         static void Main(string[] args)
         {
-            // Se crea un nuevo árbol
             Arbol arbol = new Arbol();
-
-            // Variable para controlar la salida del menú
             bool salir = false;
 
-            // El menú se mantiene activo hasta seleccionar la opción 6
             while (!salir)
             {
                 Console.WriteLine("\nSeleccione una opcion:");
@@ -147,7 +116,6 @@
 
                 switch (opcion)
                 {
-                    // Opción para insertar un nuevo nodo
                     case 1:
                         Console.Write("Ingrese el valor del nodo: ");
                         int valInsertar = Convert.ToInt32(Console.ReadLine());
@@ -162,7 +130,6 @@
                         }
                         break;
 
-                    // Opción para buscar un nodo
                     case 2:
                         Console.Write("Ingrese el nodo a buscar: ");
                         int valBuscar = Convert.ToInt32(Console.ReadLine());
@@ -177,7 +144,6 @@
                         }
                         break;
 
-                    // Opción para mostrar el recorrido Inorden
                     case 3:
                         Console.WriteLine("Recorrido Inorden:");
 
@@ -191,7 +157,6 @@
                         }
                         break;
 
-                    // Opción para mostrar el recorrido Preorden
                     case 4:
                         Console.WriteLine("Recorrido Preorden:");
 
@@ -205,7 +170,6 @@
                         }
                         break;
 
-                    // Opción para mostrar el recorrido Postorden
                     case 5:
                         Console.WriteLine("Recorrido Postorden:");
 
@@ -219,12 +183,10 @@
                         }
                         break;
 
-                    // Opción para salir del programa
                     case 6:
                         salir = true;
                         break;
 
-                    // Control de opciones no válidas
                     default:
                         Console.WriteLine("Opcion no valida");
                         break;
